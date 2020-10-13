@@ -33,15 +33,7 @@ impl fmt::Display for SimulatorError {
 }
 
 impl error::Error for SimulatorError {
-    fn description(&self) -> &str {
-        match *self {
-            SimulatorError::GlCreation(ref err) => err.description(),
-            SimulatorError::GlContext(ref err) => err.description(),
-            SimulatorError::Window(ref err) => err,
-        }
-    }
-
-    fn cause(&self) -> Option<&error::Error> {
+    fn cause(&self) -> Option<&dyn error::Error> {
         match *self {
             SimulatorError::GlCreation(ref err) => Some(err),
             SimulatorError::GlContext(ref err) => Some(err),
